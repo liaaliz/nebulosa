@@ -1,11 +1,11 @@
 extends CharacterBody2D
-const BOOST_VAL := 60
-var orientation
+@export var mouse_data : MousePositionData
+const _BOOST_VAL := 60
+var _orientation
 
 func _physics_process(delta: float) -> void:
-	var mouse_pos = get_global_mouse_position()
-	look_at(Vector2(mouse_pos.x, mouse_pos.y))
-	orientation = Vector2.RIGHT.rotated(rotation)
+	look_at(Vector2(mouse_data.mouse_pos.x, mouse_data.mouse_pos.y))
+	_orientation = Vector2.RIGHT.rotated(rotation)
 	
 	boost()
 	move_and_slide()
@@ -17,4 +17,4 @@ func _physics_process(delta: float) -> void:
 
 func boost():
 	if Input.is_action_pressed("boost"):
-		velocity = lerp(velocity, orientation * BOOST_VAL, 0.3)
+		velocity = lerp(velocity, _orientation * _BOOST_VAL, 0.3)
