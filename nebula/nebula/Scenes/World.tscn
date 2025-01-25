@@ -1,0 +1,169 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk6pdycmwoo8u"]
+
+[ext_resource type="Script" path="res://Code/player.gd" id="1_q25ms"]
+[ext_resource type="Shader" path="res://Scenes/MetaballsRender.gdshader" id="2_ao4p1"]
+[ext_resource type="Texture2D" uid="uid://bmq4wte5fa51c" path="res://Art/BallGradient.png" id="2_u1d7n"]
+[ext_resource type="Script" path="res://Scenes/metaball.gd" id="3_6841p"]
+[ext_resource type="Texture2D" uid="uid://c0rkrlolha6jn" path="res://Art/metagradient.png" id="4_ed8lo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1acul"]
+shader = ExtResource("2_ao4p1")
+shader_parameter/gradient = ExtResource("4_ed8lo")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0nbqa"]
+viewport_path = NodePath("SubViewport")
+
+[node name="World" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="Body" type="CharacterBody2D" parent="Player"]
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 0.0
+floor_block_on_wall = false
+script = ExtResource("1_q25ms")
+
+[node name="Art" type="Polygon2D" parent="Player/Body"]
+position = Vector2(5, 0)
+rotation = 1.5708
+polygon = PackedVector2Array(0, 0, 3, 11, 0, 8, -3, 11)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(640, 360)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MetaballPool" type="Node2D" parent="SubViewport"]
+
+[node name="Metaball" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball2" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball3" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball4" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball5" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball6" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball7" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball8" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball9" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball10" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball11" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball12" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball13" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball14" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball15" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball16" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball17" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball18" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball19" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball20" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball21" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball22" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball23" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="Metaball24" type="Sprite2D" parent="SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("2_u1d7n")
+script = ExtResource("3_6841p")
+
+[node name="MetaballsRendering" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1acul")
+position = Vector2(320, 180)
+texture = SubResource("ViewportTexture_0nbqa")
