@@ -12,12 +12,13 @@ wall_min_slide_angle = 0.0
 floor_block_on_wall = false
 script = ExtResource("1_cubp4")
 
+[node name="Laser" type="Polygon2D" parent="Body"]
+rotation = 1.5708
+scale = Vector2(0.5, 300)
+color = Color(1, 0, 0.333333, 1)
+polygon = PackedVector2Array(1, 0, -1, 0, -1, -6, 1, -6, 0.999992, -3.58213)
+
 [node name="Art" type="Polygon2D" parent="Body"]
 position = Vector2(5, 0)
 rotation = 1.5708
-polygon = PackedVector2Array(0, 0, 3, 10, 0, 6, -3, 10)
-
-[node name="Laser" type="Polygon2D" parent="Body"]
-position = Vector2(5, 0)
-rotation = 1.5708
-color = Color(1, 0, 0.333333, 1)
+polygon = PackedVector2Array(0, 0, 3, 11, 0, 8, -3, 11)
