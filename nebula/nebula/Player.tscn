@@ -5,7 +5,6 @@
 [node name="Player" type="Node2D"]
 
 [node name="Body" type="CharacterBody2D" parent="."]
-position = Vector2(598, 338)
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
