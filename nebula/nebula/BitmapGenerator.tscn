@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dts5q7bpfll0u"]
+
+[ext_resource type="PackedScene" uid="uid://bk6pdycmwoo8u" path="res://Scenes/WorldTexture.tscn" id="1_f4532"]
+[ext_resource type="Script" path="res://Code/MouseTracker.gd" id="1_xipe6"]
+[ext_resource type="Resource" uid="uid://c6r1amopvec22" path="res://Data/MouseData.tres" id="3_a0uad"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fc1ah"]
+viewport_path = NodePath("WorldTexture/WorldRenderer")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8mml6"]
+viewport_path = NodePath("WorldRenderer")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3dcmj"]
+viewport_path = NodePath("WorldTexture/WorldRenderer/World/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_id2ug"]
+viewport_path = NodePath("PlayerViewport")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_xipe6")
+mouse_data = ExtResource("3_a0uad")
+
+[node name="GameScreen" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_fc1ah")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.27379)
+projection = 1
+size = 3.60299
+
+[node name="WorldTexture" parent="." instance=ExtResource("1_f4532")]
+texture = SubResource("ViewportTexture_8mml6")
+
+[node name="MetaballsRendering" parent="WorldTexture/WorldRenderer/World" index="1"]
+texture = SubResource("ViewportTexture_3dcmj")
+
+[node name="PlayerRender" parent="WorldTexture/WorldRenderer/World" index="2"]
+texture = SubResource("ViewportTexture_id2ug")
+
+[node name="Body" parent="WorldTexture/WorldRenderer/World/Player" index="0"]
+mouse_data = ExtResource("3_a0uad")
+
+[editable path="WorldTexture"]

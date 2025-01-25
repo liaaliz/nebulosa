@@ -1,0 +1,200 @@
+[gd_scene load_steps=10 format=3 uid="uid://bk6pdycmwoo8u"]
+
+[ext_resource type="Texture2D" uid="uid://c8vypvm3ti6x5" path="res://Art/metaballs_texture.png" id="1_se85n"]
+[ext_resource type="Script" path="res://Code/player.gd" id="2_xpfvd"]
+[ext_resource type="Texture2D" uid="uid://bmq4wte5fa51c" path="res://Art/BallGradient.png" id="3_5p0ak"]
+[ext_resource type="Script" path="res://Code/metaball.gd" id="4_7facu"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jsn4f"]
+viewport_path = NodePath("WorldRenderer")
+
+[sub_resource type="Shader" id="Shader_qvqqo"]
+code = "shader_type canvas_item;
+
+uniform sampler2D gradient;
+
+void fragment() {
+	float b = texture(TEXTURE, UV).r;
+	COLOR = texture(gradient, vec2(b, 0.0f));
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1acul"]
+shader = SubResource("Shader_qvqqo")
+shader_parameter/gradient = ExtResource("1_se85n")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0nbqa"]
+viewport_path = NodePath("WorldRenderer/World/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oqh3l"]
+viewport_path = NodePath("PlayerViewport")
+
+[node name="WorldTexture" type="Sprite2D"]
+texture = SubResource("ViewportTexture_jsn4f")
+centered = false
+
+[node name="WorldRenderer" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(640, 360)
+
+[node name="World" type="Node2D" parent="WorldRenderer"]
+
+[node name="MainCamera" type="Camera2D" parent="WorldRenderer/World"]
+position = Vector2(320, 180)
+
+[node name="MetaballsRendering" type="Sprite2D" parent="WorldRenderer/World"]
+material = SubResource("ShaderMaterial_1acul")
+position = Vector2(320, 180)
+texture = SubResource("ViewportTexture_0nbqa")
+
+[node name="PlayerRender" type="Sprite2D" parent="WorldRenderer/World"]
+position = Vector2(320, 180)
+texture = SubResource("ViewportTexture_oqh3l")
+
+[node name="Player" type="Node2D" parent="WorldRenderer/World"]
+
+[node name="Body" type="CharacterBody2D" parent="WorldRenderer/World/Player"]
+position = Vector2(320, 180)
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 0.0
+floor_block_on_wall = false
+script = ExtResource("2_xpfvd")
+
+[node name="Art" type="Polygon2D" parent="WorldRenderer/World/Player/Body"]
+position = Vector2(5, 0)
+rotation = 1.5708
+polygon = PackedVector2Array(0, 0, 3, 11, 0, 8, -3, 11)
+
+[node name="SubViewport" type="SubViewport" parent="WorldRenderer/World"]
+size = Vector2i(640, 360)
+
+[node name="ColorRect" type="ColorRect" parent="WorldRenderer/World/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MetaballPool" type="Node2D" parent="WorldRenderer/World/SubViewport"]
+
+[node name="Metaball" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball2" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball3" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball4" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball5" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball6" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball7" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball8" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball9" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball10" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball11" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball12" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball13" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball14" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball15" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball16" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball17" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball18" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball19" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball20" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball21" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball22" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball23" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")
+
+[node name="Metaball24" type="Sprite2D" parent="WorldRenderer/World/SubViewport/MetaballPool"]
+position = Vector2(590.595, 180)
+texture = ExtResource("3_5p0ak")
+script = ExtResource("4_7facu")

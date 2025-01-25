@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="MousePositionData" load_steps=2 format=3 uid="uid://c6r1amopvec22"]
+
+[ext_resource type="Script" path="res://Code/MousePositionData.gd" id="1_56hwf"]
+
+[resource]
+script = ExtResource("1_56hwf")
