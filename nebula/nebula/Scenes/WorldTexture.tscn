@@ -1,13 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://bk6pdycmwoo8u"]
+[gd_scene load_steps=16 format=3 uid="uid://bk6pdycmwoo8u"]
 
 [ext_resource type="Script" path="res://Code/MouseTracker.gd" id="1_k3svd"]
+[ext_resource type="Script" path="res://Scenes/TimeLeft.gd" id="3_1nrce"]
 [ext_resource type="Texture2D" uid="uid://bmq4wte5fa51c" path="res://Art/BallGradient.png" id="3_5p0ak"]
 [ext_resource type="Resource" uid="uid://c6r1amopvec22" path="res://Data/MouseData.tres" id="3_fuhvx"]
-[ext_resource type="Script" path="res://Scenes/pixel_collision.gd" id="3_khq3o"]
+[ext_resource type="Script" path="res://Scenes/MetaballCollision.gd" id="3_khq3o"]
 [ext_resource type="Script" path="res://Code/metaball.gd" id="4_7facu"]
 [ext_resource type="PackedScene" uid="uid://my4ajtw36ws4" path="res://Scenes/Player.tscn" id="4_q2wrm"]
-[ext_resource type="Script" path="res://Scenes/restart_prompt.gd" id="4_qoq2r"]
+[ext_resource type="Script" path="res://Scenes/RestartPrompt.gd" id="4_qoq2r"]
 [ext_resource type="Texture2D" uid="uid://ce6k3q3lwet5d" path="res://Art/ColloredNebula.png" id="5_873x2"]
+[ext_resource type="Resource" uid="uid://b7mla3dmv6f48" path="res://Data/TimeLeftData.tres" id="5_yfdgb"]
 
 [sub_resource type="Shader" id="Shader_qvqqo"]
 code = "shader_type canvas_item;
@@ -37,13 +39,20 @@ viewport_path = NodePath("PlayerViewport")
 script = ExtResource("1_k3svd")
 mouse_data = ExtResource("3_fuhvx")
 
-[node name="MetaballCollision" type="Node" parent="." node_paths=PackedStringArray("viewport_player", "viewport_metaballs", "player")]
-script = ExtResource("3_khq3o")
-viewport_player = NodePath("../PlayerViewport")
-viewport_metaballs = NodePath("../MetaballSlice")
-player = NodePath("../PlayerViewport/Player/Body")
+[node name="==MAIN_LOOP==" type="Node" parent="."]
 
-[node name="RestartPrompt" type="Node" parent="MetaballCollision"]
+[node name="TimeLeft" type="Node" parent="==MAIN_LOOP=="]
+script = ExtResource("3_1nrce")
+time_left_data = ExtResource("5_yfdgb")
+
+[node name="MetaballCollision" type="Node" parent="==MAIN_LOOP==" node_paths=PackedStringArray("viewport_player", "viewport_metaballs", "player")]
+script = ExtResource("3_khq3o")
+time_left_data = ExtResource("5_yfdgb")
+viewport_player = NodePath("../../PlayerViewport")
+viewport_metaballs = NodePath("../../MetaballSlice")
+player = NodePath("../../PlayerViewport/Player/Body")
+
+[node name="RestartPrompt" type="Node" parent="==MAIN_LOOP==/MetaballCollision"]
 script = ExtResource("4_qoq2r")
 
 [node name="MetaballsRendering" type="Sprite2D" parent="."]
@@ -54,9 +63,11 @@ texture = SubResource("ViewportTexture_0nbqa")
 
 [node name="SliceRender" type="Sprite2D" parent="."]
 visibility_layer = 2
+texture_filter = 1
 texture = SubResource("ViewportTexture_5rvsi")
 
 [node name="PlayerRendering" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = SubResource("ViewportTexture_osjsj")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerRendering"]
@@ -79,6 +90,9 @@ transparent_bg = true
 size = Vector2i(16, 16)
 
 [node name="Player" parent="PlayerViewport" instance=ExtResource("4_q2wrm")]
+
+[node name="Art" parent="PlayerViewport/Player/Body" index="1"]
+color = Color(1, 1, 1, 1)
 
 [node name="TransformToScreen" parent="PlayerViewport/Player/Body" index="3"]
 remote_path = NodePath("../../../../MetaballSlice/SliceCamera")

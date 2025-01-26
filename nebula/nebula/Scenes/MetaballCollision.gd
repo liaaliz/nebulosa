@@ -3,9 +3,11 @@ extends Node
 @onready var bitmap_metaballs := BitMap.new()
 @onready var out_of_bounds_timer := Timer.new()
 
+@export var time_left_data : TimeLeftData
 @export var viewport_player : Viewport
 @export var viewport_metaballs : Viewport
 @export var player : Player 
+
 var out_of_bounds : bool = false
 
 func _ready() -> void:
@@ -55,7 +57,8 @@ func process_out_of_bounds_timer():
 		out_of_bounds_timer.start()
 		
 	if !out_of_bounds_timer.is_stopped():
-		print(out_of_bounds_timer.time_left)
+		time_left_data.time_left = out_of_bounds_timer.time_left
+		
 
 func guard_full_bitmap() -> bool:
 	if bitmap_metaballs.get_true_bit_count() == 0:

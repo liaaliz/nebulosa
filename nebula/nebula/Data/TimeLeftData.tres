@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="TimeLeftData" load_steps=2 format=3 uid="uid://b7mla3dmv6f48"]
+
+[ext_resource type="Script" path="res://Code/Resource/TimeLeftData.gd" id="1_lt2ly"]
+
+[resource]
+script = ExtResource("1_lt2ly")
