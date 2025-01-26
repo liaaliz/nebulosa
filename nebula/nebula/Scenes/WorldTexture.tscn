@@ -1,15 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://bk6pdycmwoo8u"]
+[gd_scene load_steps=18 format=3 uid="uid://bk6pdycmwoo8u"]
 
 [ext_resource type="Script" path="res://Code/MouseTracker.gd" id="1_k3svd"]
 [ext_resource type="Script" path="res://Scenes/TimeLeft.gd" id="3_1nrce"]
-[ext_resource type="Texture2D" uid="uid://bmq4wte5fa51c" path="res://Art/BallGradient.png" id="3_5p0ak"]
 [ext_resource type="Resource" uid="uid://c6r1amopvec22" path="res://Data/MouseData.tres" id="3_fuhvx"]
 [ext_resource type="Script" path="res://Scenes/MetaballCollision.gd" id="3_khq3o"]
 [ext_resource type="PackedScene" uid="uid://my4ajtw36ws4" path="res://Scenes/Player.tscn" id="4_q2wrm"]
 [ext_resource type="Script" path="res://Scenes/RestartPrompt.gd" id="4_qoq2r"]
 [ext_resource type="Texture2D" uid="uid://ce6k3q3lwet5d" path="res://Art/ColloredNebula.png" id="5_873x2"]
 [ext_resource type="Resource" uid="uid://b7mla3dmv6f48" path="res://Data/TimeLeftData.tres" id="5_yfdgb"]
+[ext_resource type="Script" path="res://Scenes/StarsParallax.gd" id="7_j1m37"]
 [ext_resource type="Script" path="res://Scenes/metaball_pool.gd" id="9_2tkb7"]
+[ext_resource type="Texture2D" uid="uid://cq8oap80uknfo" path="res://Art/ZerothMetaball.png" id="10_7csrm"]
 [ext_resource type="Script" path="res://Scenes/Metaball.gd" id="10_vspq1"]
 
 [sub_resource type="Shader" id="Shader_qvqqo"]
@@ -55,6 +56,24 @@ player = NodePath("../../PlayerViewport/Player/Body")
 
 [node name="RestartPrompt" type="Node" parent="==MAIN_LOOP==/MetaballCollision"]
 script = ExtResource("4_qoq2r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 662.0
+offset_bottom = 381.0
+color = Color(0, 0, 0, 1)
+
+[node name="==BACKGROUND==" type="Node2D" parent="."]
+
+[node name="Stars" type="Node2D" parent="==BACKGROUND=="]
+script = ExtResource("7_j1m37")
+
+[node name="FirstLayer" type="Node2D" parent="==BACKGROUND==/Stars"]
+
+[node name="SecondLayer" type="Node2D" parent="==BACKGROUND==/Stars"]
+
+[node name="ThirdLayer" type="Node2D" parent="==BACKGROUND==/Stars"]
 
 [node name="MetaballsRendering" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -119,8 +138,9 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("9_2tkb7")
 
 [node name="Metaball" type="Sprite2D" parent="SubViewport/MetaballPool"]
+texture_filter = 1
 position = Vector2(320, 180)
-texture = ExtResource("3_5p0ak")
+texture = ExtResource("10_7csrm")
 script = ExtResource("10_vspq1")
 
 [editable path="PlayerViewport/Player"]
