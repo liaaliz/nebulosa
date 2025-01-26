@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bk6pdycmwoo8u"]
+[gd_scene load_steps=21 format=3 uid="uid://bk6pdycmwoo8u"]
 
 [ext_resource type="Script" path="res://Code/MouseTracker.gd" id="1_k3svd"]
 [ext_resource type="Script" path="res://Scenes/TimeLeft.gd" id="3_1nrce"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://Scenes/metaball_pool.gd" id="9_2tkb7"]
 [ext_resource type="Texture2D" uid="uid://cq8oap80uknfo" path="res://Art/ZerothMetaball.png" id="10_7csrm"]
 [ext_resource type="Script" path="res://Scenes/Metaball.gd" id="10_vspq1"]
+[ext_resource type="Resource" uid="uid://bgonscyijxou0" path="res://Data/PlayerPositionData.tres" id="10_w7r62"]
+[ext_resource type="FontFile" uid="uid://c5vlsuj8n8esl" path="res://Data/cour.ttf" id="14_3jk04"]
+[ext_resource type="FontFile" uid="uid://cwp3u3451cu80" path="res://Data/courbd.ttf" id="15_khxyp"]
 
 [sub_resource type="Shader" id="Shader_qvqqo"]
 code = "shader_type canvas_item;
@@ -41,6 +44,37 @@ viewport_path = NodePath("PlayerViewport")
 script = ExtResource("1_k3svd")
 mouse_data = ExtResource("3_fuhvx")
 
+[node name="TextEdit2" type="RichTextLabel" parent="."]
+modulate = Color(1, 0, 1, 1)
+z_index = 1
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 61.0
+offset_top = 110.0
+offset_right = 580.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(259, 70)
+theme_override_fonts/normal_font = ExtResource("14_3jk04")
+theme_override_fonts/bold_font = ExtResource("15_khxyp")
+bbcode_enabled = true
+text = "[b][wave][font_size=12][center]
+ _        _______  ______            _        _______  _______  _______ 
+( (    /|(  ____ \\(  ___ \\ |\\     /|( \\      (  ___  )(  ____ \\(  ___  )
+|  \\  ( || (    \\/| (   ) )| )   ( || (      | (   ) || (    \\/| (   ) |
+|   \\ | || (__    | (__/ / | |   | || |      | |   | || (_____ | (___) |
+| (\\ \\) ||  __)   |  __ (  | |   | || |      | |   | |(_____  )|  ___  |
+| | \\   || (      | (  \\ \\ | |   | || |      | |   | |      ) || (   ) |
+| )  \\  || (____/\\| )___) )| (___) || (____/\\| (___) |/\\____) || )   ( |
+|/    )_)(_______/|/ \\___/ (_______)(_______/(_______)\\_______)|/     \\|
+
+"
+fit_content = true
+autowrap_mode = 0
+
 [node name="==MAIN_LOOP==" type="Node" parent="."]
 
 [node name="TimeLeft" type="Node" parent="==MAIN_LOOP=="]
@@ -68,12 +102,15 @@ color = Color(0, 0, 0, 1)
 
 [node name="Stars" type="Node2D" parent="==BACKGROUND=="]
 script = ExtResource("7_j1m37")
+player_data = ExtResource("10_w7r62")
 
 [node name="FirstLayer" type="Node2D" parent="==BACKGROUND==/Stars"]
+scale = Vector2(1.2, 1.2)
 
 [node name="SecondLayer" type="Node2D" parent="==BACKGROUND==/Stars"]
 
 [node name="ThirdLayer" type="Node2D" parent="==BACKGROUND==/Stars"]
+scale = Vector2(0.8, 0.8)
 
 [node name="MetaballsRendering" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -93,6 +130,7 @@ position = Vector2(320, 180)
 texture = SubResource("ViewportTexture_osjsj")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerRendering"]
+texture_filter = 1
 remote_path = NodePath("../../SliceRender")
 
 [node name="MetaballSlice" type="SubViewport" parent="."]
@@ -116,9 +154,10 @@ size = Vector2i(16, 16)
 
 [node name="Body" parent="PlayerViewport/Player" index="0"]
 position = Vector2(320, 180)
+player_data = ExtResource("10_w7r62")
 
 [node name="Art" parent="PlayerViewport/Player/Body" index="1"]
-color = Color(1, 1, 1, 1)
+color = Color(1, 1, 0, 1)
 
 [node name="TransformToScreen" parent="PlayerViewport/Player/Body" index="3"]
 remote_path = NodePath("../../../../MetaballSlice/SliceCamera")

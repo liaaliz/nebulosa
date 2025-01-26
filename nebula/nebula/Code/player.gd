@@ -2,7 +2,8 @@ class_name Player
 extends CharacterBody2D
 
 @export var mouse_data : MousePositionData
-const _BOOST_VAL := 240
+@export var player_data : PlayerPositionData
+const _BOOST_VAL := 160
 var _orientation
 
 func _physics_process(delta: float) -> void:
@@ -11,7 +12,9 @@ func _physics_process(delta: float) -> void:
 	
 	boost()
 	move_and_slide()
-	
+	position.x = clamp(position.x, 0 + 4, 640 - 4)
+	position.y = clamp(position.y, 0 + 11, 360 - 11)
+	player_data.player_position = global_position
 	#edge case:
 	# when the player is to close to the mouse, it starts to spin.
 	# give a minimum threshold of when the player is at some distance

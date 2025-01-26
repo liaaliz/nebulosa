@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	
 	if guard_full_bitmap(): return
 	
-	var loop_size = bitmap_player.get_size().x -1;               
+	var loop_size = bitmap_player.get_size().x;               
 	var player_bits : Array[Vector2] = [] 
 	
 	for i in range(0, loop_size):
