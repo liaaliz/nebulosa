@@ -14,9 +14,11 @@ func _init(_move_speed := move_speed, _size := size, _movement_strategy := initi
 func _physics_process(delta: float) -> void:
 	movement_strategy.call()
 	if position.x < 0 - size.get_width():
-		position.x = 640 + 100
+		randomize()
+		position.x = 640 + 200
+		position.y = randi() % 360
 
 func initial_movement_strategy(delta := get_process_delta_time()):
-	if scale <= Vector2.ZERO : return
+	if scale <= Vector2.ZERO : return   
 	scale.x -= (move_speed * delta)/100
 	scale.y -= (move_speed * delta)/100

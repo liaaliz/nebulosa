@@ -1,9 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bk6pdycmwoo8u"]
+[gd_scene load_steps=20 format=3 uid="uid://bk6pdycmwoo8u"]
 
 [ext_resource type="Script" path="res://Code/MouseTracker.gd" id="1_k3svd"]
 [ext_resource type="Script" path="res://Scenes/ColorBoder.gd" id="3_a3h8s"]
 [ext_resource type="Resource" uid="uid://c6r1amopvec22" path="res://Data/MouseData.tres" id="3_fuhvx"]
-[ext_resource type="Script" path="res://Scenes/Alien.gd" id="3_hci8g"]
 [ext_resource type="Script" path="res://Scenes/MetaballCollision.gd" id="3_khq3o"]
 [ext_resource type="PackedScene" uid="uid://my4ajtw36ws4" path="res://Scenes/Player.tscn" id="4_q2wrm"]
 [ext_resource type="Script" path="res://Scenes/RestartPrompt.gd" id="4_qoq2r"]
@@ -13,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://cq8oap80uknfo" path="res://Art/ZerothMetaball.png" id="10_7csrm"]
 [ext_resource type="Script" path="res://Scenes/Metaball.gd" id="10_vspq1"]
 [ext_resource type="Resource" uid="uid://bgonscyijxou0" path="res://Data/PlayerPositionData.tres" id="10_w7r62"]
-[ext_resource type="Texture2D" uid="uid://c55wvejp2ndbd" path="res://Art/ALIEN.png" id="11_pdpqg"]
 [ext_resource type="FontFile" uid="uid://c5vlsuj8n8esl" path="res://Data/cour.ttf" id="14_3jk04"]
 [ext_resource type="FontFile" uid="uid://cwp3u3451cu80" path="res://Data/courbd.ttf" id="15_khxyp"]
 
@@ -52,86 +50,20 @@ offset_right = 639.0
 offset_bottom = 358.0
 color = Color(0, 0, 0, 1)
 
-[node name="TitleCard" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color(1, 0, 1, 1)
-z_index = 1
-texture_filter = 1
-offset_left = 61.0
-offset_top = 110.0
-offset_right = 580.0
-offset_bottom = 250.0
-pivot_offset = Vector2(259, 70)
-theme_override_fonts/normal_font = ExtResource("14_3jk04")
-theme_override_fonts/bold_font = ExtResource("15_khxyp")
-bbcode_enabled = true
-text = "[b][wave][font_size=12][center]
- _        _______  ______            _        _______  _______  _______ 
-( (    /|(  ____ \\(  ___ \\ |\\     /|( \\      (  ___  )(  ____ \\(  ___  )
-|  \\  ( || (    \\/| (   ) )| )   ( || (      | (   ) || (    \\/| (   ) |
-|   \\ | || (__    | (__/ / | |   | || |      | |   | || (_____ | (___) |
-| (\\ \\) ||  __)   |  __ (  | |   | || |      | |   | |(_____  )|  ___  |
-| | \\   || (      | (  \\ \\ | |   | || |      | |   | |      ) || (   ) |
-| )  \\  || (____/\\| )___) )| (___) || (____/\\| (___) |/\\____) || )   ( |
-|/    )_)(_______/|/ \\___/ (_______)(_______/(_______)\\_______)|/     \\|
-
-"
-fit_content = true
-autowrap_mode = 0
-
-[node name="DeathClock" type="RichTextLabel" parent="."]
-modulate = Color(0, 1, 1, 1)
-z_index = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 234.0
-offset_top = 326.0
-offset_right = 637.0
-offset_bottom = 355.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_fonts/normal_font = ExtResource("14_3jk04")
-theme_override_fonts/bold_font = ExtResource("15_khxyp")
-bbcode_enabled = true
-text = "[b][font_size=25][center]
-"
-fit_content = true
-
-[node name="Score" type="RichTextLabel" parent="."]
-modulate = Color(0, 1, 1, 1)
-z_index = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 344.0
-offset_right = 164.0
-offset_bottom = 357.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_fonts/normal_font = ExtResource("14_3jk04")
-theme_override_fonts/bold_font = ExtResource("15_khxyp")
-bbcode_enabled = true
-text = "[b][font_size=10][left] 0 x 10^1
-"
-fit_content = true
-
 [node name="==MAIN_LOOP==" type="Node" parent="."]
 
-[node name="MetaballCollision" type="Node" parent="==MAIN_LOOP==" node_paths=PackedStringArray("viewport_player", "viewport_metaballs", "player", "restart_prompt", "score_label")]
+[node name="MetaballCollision" type="Node" parent="==MAIN_LOOP==" node_paths=PackedStringArray("viewport_player", "viewport_metaballs", "player", "restart_prompt", "score_label", "final_score_label")]
 script = ExtResource("3_khq3o")
 viewport_player = NodePath("../../PlayerViewport")
 viewport_metaballs = NodePath("../../MetaballSlice")
 player = NodePath("../../PlayerViewport/Player/Body")
 restart_prompt = NodePath("RestartPrompt")
-score_label = NodePath("../../Score")
+score_label = NodePath("../../CanvasLayer/Control/Score")
+final_score_label = NodePath("../../CanvasLayer/Control/FinalScore")
 
 [node name="RestartPrompt" type="Node" parent="==MAIN_LOOP==/MetaballCollision" node_paths=PackedStringArray("death_clock_label")]
 script = ExtResource("4_qoq2r")
-death_clock_label = NodePath("../../../DeathClock")
+death_clock_label = NodePath("../../../CanvasLayer/Control/DeathClock")
 
 [node name="==BACKGROUND==" type="Node2D" parent="."]
 
@@ -148,47 +80,16 @@ scale = Vector2(1.2, 1.2)
 scale = Vector2(0.8, 0.8)
 
 [node name="MetaballsRendering" type="Sprite2D" parent="."]
-texture_filter = 1
 material = SubResource("ShaderMaterial_1acul")
 position = Vector2(320, 180)
 texture = SubResource("ViewportTexture_0nbqa")
 
 [node name="SliceRender" type="Sprite2D" parent="."]
 visibility_layer = 2
-texture_filter = 1
 position = Vector2(320, 180)
 texture = SubResource("ViewportTexture_5rvsi")
 
-[node name="Laser" type="Polygon2D" parent="."]
-position = Vector2(320, 180)
-rotation = 1.5708
-scale = Vector2(1, 0.125)
-offset = Vector2(17, -0.507874)
-polygon = PackedVector2Array(-17, 0, -17, 1, 836, 1, 836, 0)
-
-[node name="AlienCluster" type="Node2D" parent="."]
-visible = false
-
-[node name="Alien" type="CharacterBody2D" parent="AlienCluster" node_paths=PackedStringArray("player")]
-motion_mode = 1
-wall_min_slide_angle = 0.0
-script = ExtResource("3_hci8g")
-player = NodePath("../../PlayerViewport/Player/Body")
-
-[node name="SpriteAlien" type="Sprite2D" parent="AlienCluster/Alien"]
-modulate = Color(1, 0, 1, 1)
-texture = ExtResource("11_pdpqg")
-
-[node name="AlienTrail" type="Sprite2D" parent="AlienCluster"]
-modulate = Color(1, 0, 1, 1)
-texture = ExtResource("11_pdpqg")
-
-[node name="AlienTrail2" type="Sprite2D" parent="AlienCluster"]
-modulate = Color(1, 0, 1, 1)
-texture = ExtResource("11_pdpqg")
-
 [node name="PlayerRendering" type="Sprite2D" parent="."]
-texture_filter = 1
 position = Vector2(320, 180)
 texture = SubResource("ViewportTexture_osjsj")
 
@@ -198,6 +99,7 @@ remote_path = NodePath("../../SliceRender")
 
 [node name="Border" type="ColorRect" parent="." node_paths=PackedStringArray("player")]
 modulate = Color(0, 1, 1, 1)
+texture_filter = 1
 offset_left = -14.0
 offset_top = -14.0
 offset_right = 1.0
@@ -206,6 +108,7 @@ script = ExtResource("3_a3h8s")
 player = NodePath("../PlayerViewport/Player/Body")
 
 [node name="Border2" type="ColorRect" parent="Border"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 13.0
 offset_top = 388.0
@@ -214,12 +117,14 @@ offset_bottom = 1044.0
 rotation = -1.57079
 
 [node name="Border3" type="ColorRect" parent="Border"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 653.0
 offset_right = 668.0
 offset_bottom = 388.0
 
 [node name="Border4" type="ColorRect" parent="Border"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 654.0
 offset_right = 669.0
@@ -235,6 +140,7 @@ position = Vector2(320, 180)
 
 [node name="MetaballsRendering" type="Sprite2D" parent="MetaballSlice"]
 visibility_layer = 2
+texture_filter = 1
 material = SubResource("ShaderMaterial_1acul")
 position = Vector2(320, 180)
 texture = SubResource("ViewportTexture_0nbqa")
@@ -252,14 +158,11 @@ player_data = ExtResource("10_w7r62")
 [node name="TransformToScreen" parent="PlayerViewport/Player/Body" index="4"]
 remote_path = NodePath("../../../../MetaballSlice/SliceCamera")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerViewport/Player/Body" index="5"]
-remote_path = NodePath("../../../../Laser")
-update_scale = false
-
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(640, 360)
 
 [node name="ColorRect" type="ColorRect" parent="SubViewport"]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -271,9 +174,78 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("9_2tkb7")
 
 [node name="Metaball" type="Sprite2D" parent="SubViewport/MetaballPool"]
-texture_filter = 1
 position = Vector2(320, 180)
 texture = ExtResource("10_7csrm")
 script = ExtResource("10_vspq1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeathClock" type="RichTextLabel" parent="CanvasLayer/Control"]
+modulate = Color(0, 1, 1, 1)
+z_index = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("14_3jk04")
+theme_override_fonts/bold_font = ExtResource("15_khxyp")
+bbcode_enabled = true
+text = "[b][font_size=16][center]
+"
+fit_content = true
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer/Control"]
+modulate = Color(0, 1, 1, 1)
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019
+anchor_top = 0.017
+anchor_right = 0.969
+anchor_bottom = 0.064
+offset_left = -0.160001
+offset_top = -0.12
+offset_right = 8.83997
+offset_bottom = -0.0400009
+grow_horizontal = 2
+pivot_offset = Vector2(309, 9)
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("14_3jk04")
+theme_override_fonts/bold_font = ExtResource("15_khxyp")
+bbcode_enabled = true
+text = "[font_size=14][left] 0 x 10^0
+"
+fit_content = true
+
+[node name="FinalScore" type="RichTextLabel" parent="CanvasLayer/Control"]
+visible = false
+modulate = Color(0, 1, 1, 1)
+z_index = 1
+layout_mode = 0
+offset_left = -14.0
+offset_top = 162.0
+offset_right = 653.0
+offset_bottom = 203.0
+pivot_offset = Vector2(333, 20)
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("14_3jk04")
+theme_override_fonts/bold_font = ExtResource("15_khxyp")
+bbcode_enabled = true
+text = "[b][font_size=36][center] 0 x 10^0
+"
+fit_content = true
 
 [editable path="PlayerViewport/Player"]

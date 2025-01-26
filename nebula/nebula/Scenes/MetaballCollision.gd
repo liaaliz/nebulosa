@@ -9,11 +9,13 @@ extends Node
 @export var player : Player 
 @export var restart_prompt : Node
 @export var score_label : RichTextLabel
+@export var final_score_label : RichTextLabel
 
 var score : int = 0
 var score_mult : int = 1
 var score_magnitude : int = 0
 var score_is_running := false
+var streak : int
 
 var out_of_bounds : bool = false
 
@@ -23,11 +25,12 @@ func _ready() -> void:
 	out_of_bounds_timer.wait_time = 3.0
 	out_of_bounds_timer.timeout.connect(player.queue_free)
 	out_of_bounds_timer.timeout.connect(restart_prompt.flip_can_restart)
+	out_of_bounds_timer.timeout.connect(final_score) 
 	add_child(out_of_bounds_timer)
 	
 	score_timer.autostart = false
 	score_timer.one_shot = true
-	score_timer.wait_time = 1.0
+	score_timer.wait_time = 0.5
 	score_timer.timeout.connect(update_score)
 	add_child(score_timer)
 
@@ -66,6 +69,7 @@ func process_out_of_bounds_timer():
 		out_of_bounds_timer.stop()
 		score_timer.stop()
 		restart_prompt.death_clock(3.0, player.modulate)
+		streak = 1
 		return
 	
 	restart_prompt.death_clock(out_of_bounds_timer.time_left, player.modulate)
@@ -96,14 +100,27 @@ func process_player_recollor():
 	player.modulate = Color.MAGENTA
 
 func update_score():
-	score_label.text = "[b][left][font_size=10]" + str(score) + " + " + str(score_mult) + " x 10^" + str(score_magnitude)
-	score += 5
+	score_label.text = "[b][left][font_size=14]" + str(score) + " + " + str(score_mult) + " x 10^" + str(score_magnitude)
+	score += 5 * streak
 	
-	if(score % 10 == 0):
+	if score < 10:
+		return
+	
+	if score_magnitude == 0:
+		score_magnitude += 1
+	
+	var magnitude = int(pow(10, score_magnitude))
+	
+	if score % magnitude == 0 or score > magnitude:
 		score_mult += 1
-		score = 0
-		
-	if(score_mult % 10 == 0):
+		score = score % magnitude
+	
+	if score_mult % magnitude == 0:
 		score_magnitude += 1
 		score_mult = 1
+
+func final_score():
+	final_score_label.text = "[b][font_size=36][center]" + str(score) + " + " + str(score_mult) + " x 10^" + str(score_magnitude)
+	final_score_label.visible = true
+	score_label.visible = false
 	
