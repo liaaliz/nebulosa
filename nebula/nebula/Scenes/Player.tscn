@@ -1,55 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://my4ajtw36ws4"]
+[gd_scene load_steps=3 format=3 uid="uid://my4ajtw36ws4"]
 
-[sub_resource type="GDScript" id="GDScript_eddrq"]
-script/source = "extends CharacterBody2D
-const BOOST_VAL := 1200
-var orientation
-@onready var reload_timer = Timer.new()
-
-func _ready() -> void:
-	reload_timer.autostart = false
-	reload_timer.wait_time = 1.0
-
-func _unhandled_key_input(event: InputEvent) -> void:
-	boost()
-		
-func _physics_process(delta: float) -> void:
-	orientation = Vector2.RIGHT.rotated(rotation)
-	var mouse_pos = get_global_mouse_position()
-	look_at(Vector2(mouse_pos.x, mouse_pos.y))
-	move_and_slide()
-	
-	#edge case:
-	# when the player is to close to the mouse, it starts to spin.
-	# give a minimum threshold of when the player is at some distance
-	# from the mouse
-
-func boost():
-	if Input.is_action_pressed(\"boost\"):
-		velocity += orientation * BOOST_VAL
-		velocity = velocity.limit_length(150.0)
-		
-func shoot():
-	if Input.is_action_just_pressed(\"shoot\"):
-		
-"
+[ext_resource type="Script" path="res://Code/player.gd" id="1_otrx3"]
+[ext_resource type="Resource" uid="uid://c6r1amopvec22" path="res://Data/MouseData.tres" id="2_gtt8c"]
 
 [node name="Player" type="Node2D"]
 
 [node name="Body" type="CharacterBody2D" parent="."]
+rotation = 1.5708
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 floor_block_on_wall = false
-script = SubResource("GDScript_eddrq")
+script = ExtResource("1_otrx3")
+mouse_data = ExtResource("2_gtt8c")
 
-[node name="Laser" type="Polygon2D" parent="Body"]
-rotation = 1.5708
-scale = Vector2(0.5, 300)
-color = Color(1, 0, 0.333333, 1)
-polygon = PackedVector2Array(1, 0, -1, 0, -1, -6, 1, -6, 0.999992, -3.58213)
+[node name="Camera2D" type="Camera2D" parent="Body"]
 
 [node name="Art" type="Polygon2D" parent="Body"]
-position = Vector2(5, 0)
+position = Vector2(5, -1.81198e-05)
 rotation = 1.5708
+color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 3, 11, 0, 8, -3, 11)
+
+[node name="TransformToPlayer" type="RemoteTransform2D" parent="Body"]
+remote_path = NodePath("../../../../PlayerRendering")
+update_rotation = false
+
+[node name="TransformToScreen" type="RemoteTransform2D" parent="Body"]
+remote_path = NodePath("../../../../PlayerRendering")
+update_rotation = false

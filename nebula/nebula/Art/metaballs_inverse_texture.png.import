@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0rkrlolha6jn"
-path="res://.godot/imported/metagradient.png-73e70a2dcd179d349835b6ed9af9750c.ctex"
+uid="uid://ca77poilcmhqx"
+path="res://.godot/imported/metaballs_inverse_texture.png-2bb886a83e9ba1af1f2de10358724b14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/metagradient.png"
-dest_files=["res://.godot/imported/metagradient.png-73e70a2dcd179d349835b6ed9af9750c.ctex"]
+source_file="res://Art/metaballs_inverse_texture.png"
+dest_files=["res://.godot/imported/metaballs_inverse_texture.png-2bb886a83e9ba1af1f2de10358724b14.ctex"]
 
 [params]
 

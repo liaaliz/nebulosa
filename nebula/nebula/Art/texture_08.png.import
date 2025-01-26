@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0bmf4312fu4b"
-path="res://.godot/imported/inverse_metaballs_texture.png-c7c6ee1eb630e82c52ffad32d80f18e2.ctex"
+uid="uid://88wu2b6dkwws"
+path="res://.godot/imported/texture_08.png-49c0234491576e6bb66ba3ce7fb57b85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/inverse_metaballs_texture.png"
-dest_files=["res://.godot/imported/inverse_metaballs_texture.png-c7c6ee1eb630e82c52ffad32d80f18e2.ctex"]
+source_file="res://Art/texture_08.png"
+dest_files=["res://.godot/imported/texture_08.png-49c0234491576e6bb66ba3ce7fb57b85.ctex"]
 
 [params]
 

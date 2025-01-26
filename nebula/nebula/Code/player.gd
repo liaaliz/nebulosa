@@ -1,4 +1,6 @@
+class_name Player
 extends CharacterBody2D
+
 @export var mouse_data : MousePositionData
 const _BOOST_VAL := 60
 var _orientation
