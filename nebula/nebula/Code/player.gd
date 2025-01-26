@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @export var mouse_data : MousePositionData
-const _BOOST_VAL := 60
+const _BOOST_VAL := 240
 var _orientation
 
 func _physics_process(delta: float) -> void:

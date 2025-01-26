@@ -10,13 +10,18 @@ var out_of_bounds : bool = false
 
 func _ready() -> void:
 	out_of_bounds_timer.autostart = false
-	out_of_bounds_timer.one_shot = false
+	out_of_bounds_timer.one_shot = true
 	out_of_bounds_timer.wait_time = 3.0
+	
+	out_of_bounds_timer.timeout.connect(player.queue_free)
+	out_of_bounds_timer.timeout.connect(get_child(0).flip_can_restart)
+	
 	add_child(out_of_bounds_timer)
 
 func _process(delta: float) -> void:
-	process_out_of_bounds_timer()
-	
+	if player != null:
+		process_out_of_bounds_timer()
+		
 	bitmap_player.create_from_image_alpha(viewport_player.get_texture().get_image())
 	bitmap_metaballs.create_from_image_alpha(viewport_metaballs.get_texture().get_image())
 	

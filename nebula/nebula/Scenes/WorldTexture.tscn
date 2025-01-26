@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bk6pdycmwoo8u"]
+[gd_scene load_steps=14 format=3 uid="uid://bk6pdycmwoo8u"]
 
 [ext_resource type="Script" path="res://Code/MouseTracker.gd" id="1_k3svd"]
-[ext_resource type="Texture2D" uid="uid://nqblftqj7464" path="res://Art/metaballs_texture.png" id="1_se85n"]
 [ext_resource type="Texture2D" uid="uid://bmq4wte5fa51c" path="res://Art/BallGradient.png" id="3_5p0ak"]
 [ext_resource type="Resource" uid="uid://c6r1amopvec22" path="res://Data/MouseData.tres" id="3_fuhvx"]
 [ext_resource type="Script" path="res://Scenes/pixel_collision.gd" id="3_khq3o"]
 [ext_resource type="Script" path="res://Code/metaball.gd" id="4_7facu"]
 [ext_resource type="PackedScene" uid="uid://my4ajtw36ws4" path="res://Scenes/Player.tscn" id="4_q2wrm"]
+[ext_resource type="Script" path="res://Scenes/restart_prompt.gd" id="4_qoq2r"]
+[ext_resource type="Texture2D" uid="uid://ce6k3q3lwet5d" path="res://Art/ColloredNebula.png" id="5_873x2"]
 
 [sub_resource type="Shader" id="Shader_qvqqo"]
 code = "shader_type canvas_item;
@@ -21,7 +22,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1acul"]
 shader = SubResource("Shader_qvqqo")
-shader_parameter/gradient = ExtResource("1_se85n")
+shader_parameter/gradient = ExtResource("5_873x2")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0nbqa"]
 viewport_path = NodePath("SubViewport")
@@ -36,13 +37,17 @@ viewport_path = NodePath("PlayerViewport")
 script = ExtResource("1_k3svd")
 mouse_data = ExtResource("3_fuhvx")
 
-[node name="PixelCollision" type="Node" parent="." node_paths=PackedStringArray("viewport_player", "viewport_metaballs", "player")]
+[node name="MetaballCollision" type="Node" parent="." node_paths=PackedStringArray("viewport_player", "viewport_metaballs", "player")]
 script = ExtResource("3_khq3o")
 viewport_player = NodePath("../PlayerViewport")
 viewport_metaballs = NodePath("../MetaballSlice")
 player = NodePath("../PlayerViewport/Player/Body")
 
+[node name="RestartPrompt" type="Node" parent="MetaballCollision"]
+script = ExtResource("4_qoq2r")
+
 [node name="MetaballsRendering" type="Sprite2D" parent="."]
+texture_filter = 1
 material = SubResource("ShaderMaterial_1acul")
 position = Vector2(320, 180)
 texture = SubResource("ViewportTexture_0nbqa")
