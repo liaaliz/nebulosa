@@ -17,5 +17,6 @@ func _physics_process(delta: float) -> void:
 		position.x = 640 + 100
 
 func initial_movement_strategy(delta := get_process_delta_time()):
-	scale.x -= (move_speed * delta)/200
-	scale.y -= (move_speed * delta)/200
+	if scale <= Vector2.ZERO : return
+	scale.x -= (move_speed * delta)/100
+	scale.y -= (move_speed * delta)/100
