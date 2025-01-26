@@ -1,10 +1,22 @@
+class_name Metaball
 extends Sprite2D
-var MOVE_SPEED : int = 5
+
+var type : MetaballPool.MetaballType
+
+func _init():
+	randomize()
 
 func _ready() -> void:
-	randomize()
-	MOVE_SPEED = randi() % 40 + 5
-	position.y = randi() % 360
+	call_deferred("reset_metaball", self)
 
 func _physics_process(delta: float) -> void:
-	position.x -= MOVE_SPEED * delta
+	position.x -= type.move_speed * delta
+
+func reset_metaball(metaball: Metaball):
+	var pool = get_parent()
+	if pool.types.is_empty():
+		return
+		
+	var which_type = randi() % pool.types.size() 
+	type = pool.types[which_type]
+	position = metaball.type.handle_init_position()
